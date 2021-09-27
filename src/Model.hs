@@ -1,7 +1,5 @@
 module Model where
 
-import System.Random
-
 type PositionInGrid = (Int, Int)
 
 data Direction
