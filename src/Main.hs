@@ -61,6 +61,7 @@ handleSpecialKey k b =
     KeyDown -> b {boardSnake = changeDir DirBottom}
     KeyLeft -> b {boardSnake = changeDir DirLeft}
     KeyRight -> b {boardSnake = changeDir DirRight}
+    _ -> b
   where
     changeDir = changeSnakeDir (boardSnake b)
 
