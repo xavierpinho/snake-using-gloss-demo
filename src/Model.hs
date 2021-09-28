@@ -68,7 +68,7 @@ moveSnakeAccordingToItsDirection s = s {snakeHeadPos = h', snakeTailPos = t'}
     t' = (hx, hy) : (removeLast $ snakeTailPos s)
 
 removeLast :: [a] -> [a]
-removeLast = reverse . drop 1 . reverse
+removeLast = reverse . tail . reverse
 
 moveSnake :: Board -> Board
 moveSnake b = b {boardSnake = bs'}
