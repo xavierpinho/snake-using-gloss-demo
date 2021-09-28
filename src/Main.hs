@@ -54,25 +54,13 @@ main = do
     handleEvent
     (const stepBoard)
 
-handleSpecialKey :: SpecialKey -> Board -> Board
-handleSpecialKey k b =
-  case k of
-    KeyUp -> b {boardSnake = changeDir DirUp}
-    KeyDown -> b {boardSnake = changeDir DirBottom}
-    KeyLeft -> b {boardSnake = changeDir DirLeft}
-    KeyRight -> b {boardSnake = changeDir DirRight}
-    _ -> b
-  where
-    changeDir = changeSnakeDir (boardSnake b)
-
-handleKey :: Key -> Board -> Board
-handleKey k b =
-  case k of
-    SpecialKey k -> handleSpecialKey k b
-    _ -> b
-
 handleEvent :: Event -> Board -> Board
 handleEvent e b =
   case e of
-    EventKey k Down _ _ -> handleKey k b
+    EventKey (SpecialKey KeyUp) Down _ _ -> b {boardSnake = chdir DirUp}
+    EventKey (SpecialKey KeyDown) Down _ _ -> b {boardSnake = chdir DirBottom}
+    EventKey (SpecialKey KeyLeft) Down _ _ -> b {boardSnake = chdir DirLeft}
+    EventKey (SpecialKey KeyRight) Down _ _ -> b {boardSnake = chdir DirRight}
     _ -> b
+  where
+    chdir = changeSnakeDir (boardSnake b)
